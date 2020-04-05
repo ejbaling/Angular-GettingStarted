@@ -12,13 +12,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "pm",
+      "bgt",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "pm",
+      "bgt",
       "kebab-case"
     ],
     "import-blacklist": [
@@ -54,7 +54,7 @@
     ],
     "no-empty": false,
     "no-inferrable-types": [
-      true,
+      false,
       "ignore-params"
     ],
     "no-non-null-assertion": true,
