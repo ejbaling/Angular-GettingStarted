@@ -1,10 +1,54 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { IProduct } from './budget';
+import { ProductService } from './budget.service';
 
 @Component({
-  selector: 'bgt-budget-list',
-  templateUrl: './budget-list.tpl.html'
+  templateUrl: './budget-list.tpl.html',
+  styleUrls: ['budget-list.component.css']
 })
 
-export class BudgetListComponent {
+export class BudgetListComponent implements OnInit {
   pageTitle: string = 'My Budget List';
+  imageWidth: number = 50;
+  imageMargin: number = 2;
+  showImage: boolean = false;
+  _listFilter: string;
+  errorMessage: string;
+
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+  }
+  filteredProducts: IProduct[] = [];
+  products: IProduct[] = [];
+
+  constructor(private productService: ProductService) {
+  }
+
+  onRatingClicked(message: string): void {
+    this.pageTitle = `Product List: ${message}`;
+  }
+
+  performFilter(filterBy: string): IProduct[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.products.filter((product: IProduct) =>
+      product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  }
+
+  toggleImage(): void {
+    this.showImage = !this.showImage;
+  }
+
+  ngOnInit(): void {
+    this.productService.getProducts().subscribe({
+      next: products => {
+        this.products = products;
+        this.filteredProducts = this.products;
+      },
+      error: err => this.errorMessage = err
+    });
+  }
 }
