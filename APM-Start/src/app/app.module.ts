@@ -10,6 +10,7 @@ import { ConvertToSpacesPipe } from './shared/convert-to-spaces.pipe';
 import { StarComponent } from './shared/star.component';
 import { BudgetDetailComponent } from './budget-list/budget-detail.component';
 import { WelcomeComponent } from './home/welcome.component';
+import { BudgetDetailGuard } from './budget-list/budget-detail.guard';
 
 @NgModule({
   declarations: [
@@ -26,9 +27,13 @@ import { WelcomeComponent } from './home/welcome.component';
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'budget-list', component: BudgetListComponent },
-      { path: 'budget-list/:id', component: BudgetDetailComponent },
+      { path: 'budget-list/:id',
+        canActivate: [BudgetDetailGuard],
+        component: BudgetDetailComponent
+      },
       { path: 'welcome', component: WelcomeComponent },
-      { path: '', redirectTo: 'welcome', pathMatch: 'full' }
+      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+      { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
 
     ])
   ],
