@@ -15,7 +15,7 @@ export class BudgetDetailGuard implements CanActivate {
       const id = +next.url[1].path;
       if (isNaN(id) || id < 1) {
         alert('Invalid product Id');
-        this.router.navigate(['/budget-list']);
+        this.router.navigate(['/budget']);
         return false;
       }
       return true;

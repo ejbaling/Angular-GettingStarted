@@ -29,6 +29,6 @@ export class BudgetDetailComponent implements OnInit {
   }
 
   onBack(): void {
-    this.router.navigate(['/budget-list']);
+    this.router.navigate(['/budget']);
   }
 }

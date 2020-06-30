@@ -5,12 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Router } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { BudgetListComponent } from './budget-list/budget-list.component';
+import { BudgetListComponent } from './budget/budget-list.component';
 import { ConvertToSpacesPipe } from './shared/convert-to-spaces.pipe';
 import { StarComponent } from './shared/star.component';
-import { BudgetDetailComponent } from './budget-list/budget-detail.component';
+import { BudgetDetailComponent } from './budget/budget-detail.component';
 import { WelcomeComponent } from './home/welcome.component';
-import { BudgetDetailGuard } from './budget-list/budget-detail.guard';
+import { BudgetDetailGuard } from './budget/budget-detail.guard';
 
 @NgModule({
   declarations: [
@@ -26,8 +26,8 @@ import { BudgetDetailGuard } from './budget-list/budget-detail.guard';
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: 'budget-list', component: BudgetListComponent },
-      { path: 'budget-list/:id',
+      { path: 'budget', component: BudgetListComponent },
+      { path: 'budget/:id',
         canActivate: [BudgetDetailGuard],
         component: BudgetDetailComponent
       },
